@@ -119,8 +119,12 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    font-family: var(--font-nunito), sans-serif;
   }
   body {
     @apply bg-background text-foreground;
   }
+  html {
+  scroll-behavior: smooth;
+}
 }
