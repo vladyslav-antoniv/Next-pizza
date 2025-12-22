@@ -4,3 +4,4 @@ export { Dialog} from "./dialog";
 export { Checkbox } from "./checkbox";
 export { Select } from "./select";
 export { RangeSlider } from "./range-slider";
+export { Skeleton } from "./skeleton";

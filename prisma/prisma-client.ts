@@ -1,7 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 
 const prismaClientSingleton = () => {
-  // 👇 НОВИЙ СПОСІБ: Передаємо URL тут
   return new PrismaClient({
     datasourceUrl: process.env.DATABASE_URL, 
   });

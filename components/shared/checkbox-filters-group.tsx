@@ -3,19 +3,22 @@
 import React from "react";
 import { FilterChecboxProps, FilterCheckbox } from "./filter-checkbox";
 import { Filter } from "lucide-react";
-import { Input } from "../ui";
+import { Input, Skeleton } from "../ui";
 
 type Item = FilterChecboxProps;
 
 interface CheckboxFiltersGroupProps {
   title: string;
   items: Item[];
-  defaultItems: Item[];
+  defaultItems?: Item[];
   limit?: number;
+  loading?: boolean;
   searchImputPlaceholder?: string;
-  onChange?: (velues: string[]) => void;
+  onClickCheckbox?: (id: string) => void;
   defaultVelues?: string[];
+  selected?: Set<string>;
   className?: string;
+  name: string;
 }
 
 export function CheckboxFiltersGroup({
@@ -24,8 +27,11 @@ export function CheckboxFiltersGroup({
   defaultItems,
   limit = 5,
   searchImputPlaceholder = "Search...",
-  onChange,
+  onClickCheckbox,
   defaultVelues,
+  loading,
+  selected,
+  name,
   className,
 }: CheckboxFiltersGroupProps) {
   const [showAll, setShowAll] = React.useState(false);
@@ -35,11 +41,26 @@ export function CheckboxFiltersGroup({
     setSearchValue(e.target.value);
   };
 
+if (loading) {
+  return (
+    <div className={className}>
+      <p className="font-bold mb-3">{title}</p>
+      <Skeleton className="h-6 mb-4 rounded-[8px]"/>
+      <Skeleton className="h-6 mb-4 rounded-[8px]"/>
+      <Skeleton className="h-6 mb-4 rounded-[8px]"/>
+      <Skeleton className="h-6 mb-4 rounded-[8px]"/>
+      <Skeleton className="h-6 mb-4 rounded-[8px]"/>
+      <Skeleton className="h-6 mb-4 w-[28px] rounded-[8px]"/>
+
+    </div>
+  )
+}
+
   const list = showAll
     ? items.filter((item) =>
         item.text.toLowerCase().includes(searchValue.toLowerCase())
       )
-    : defaultItems?.slice(0, limit);
+    : (defaultItems || items).slice(0, limit);
 
   return (
     <div className={className}>
@@ -63,8 +84,9 @@ export function CheckboxFiltersGroup({
             text={item.text}
             value={item.value}
             endAdornment={item.endAdornment}
-            onCheckedChange={(ids) => console.log(ids)}
-            checked={false}
+            onCheckedChange={() => onClickCheckbox?.(item.value)}
+            checked={selected?.has(item.value)}
+            name={name}
           />
         ))}
       </div>
