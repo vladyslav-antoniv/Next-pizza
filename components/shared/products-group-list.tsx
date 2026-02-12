@@ -5,10 +5,11 @@ import { ProductCart, Title } from "./";
 import { cn } from "@/lib/utils";
 import { useIntersection } from "react-use";
 import { useCategoryStore } from "@/store/category";
+import {type ItemProps} from "./product-cart"
 
 interface Props {
   title: string;
-  items: any[];
+  items: ItemProps[];
   categoryId: number;
   listClassName?: string;
   className?: string;
@@ -44,7 +45,7 @@ export function ProductsGroupList({
             id={item.id}
             name={item.name}
             imageUrl={item.imageUrl}
-            price={item.items.price}
+            price={item.price}
           />
         ))}
       </div>

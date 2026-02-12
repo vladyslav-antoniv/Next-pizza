@@ -4,7 +4,7 @@ import { Title } from "./title";
 import { Button } from "../ui";
 import { Plus } from "lucide-react";
 
-interface Props {
+export interface ItemProps {
   id: number;
   imageUrl: string;
   name: string;
@@ -12,10 +12,10 @@ interface Props {
   className?: string;
 }
 
-export function ProductCart({ id, name, price, imageUrl, className }: Props) {
+export function ProductCart({ id, name, price, imageUrl, className }: ItemProps) {
   return (
     <div className={className}>
-      <Link href="/product/1" className="">
+      <Link href={`/product/${id}`} className="">
         <div className="flex justify-center p-6 bg-secondery rounded-lg h-[269px]">
           <img className="w-[215px] h-[215px]" src={imageUrl} alt={name} />
         </div>

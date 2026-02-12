@@ -9,3 +9,5 @@ export {Filters} from './filters';
 export {CheckboxFiltersGroup} from './checkbox-filters-group';
 export {ProductCart} from './product-cart';
 export {SearchInput} from './search-input';
+export {ProductImage} from './product-image';
+export * from './modals/choose-product-modal';
